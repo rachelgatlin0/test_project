@@ -1,0 +1,60 @@
+---
+title: "Data I/O Lab, Part 1"
+output: html_document
+---
+
+```{r, include = TRUE}
+install.packages("tidyverse")
+install.packages("readxl")
+library(tidyverse)
+library(readxl)
+```
+
+This lab uses different "slices" of the `ufo` dataset. You can use links or download them to your machine. Copy the code produced by the dropdown menu into the code chunk. As a reminder the steps are:
+
+-  `>` File
+-  `>` Import Dataset
+-  `>` From Text (`readr`)
+-  `>` paste the url
+-  `>` click "Update" and "Import"
+
+If this is review to you, explore the "Import Options" on the bottom left of the import dataset menu.
+
+1. Read in the `https://sisbid.github.io/Data-Wrangling/data/ufo/ufo_slice_1.csv` dataset into the `ufo_slice_1` R object. What delimiter separates columns?
+
+```{r}
+ufo_slice_1 <- read_csv("https://sisbid.github.io/Data-Wrangling/data/ufo/ufo_slice_1.csv")
+```
+
+2. Read in the `https://sisbid.github.io/Data-Wrangling/data/ufo/ufo_slice_2.tsv` dataset into the `ufo_slice_2` R object. What delimiter separates columns?
+
+```{r}
+ufo_slice_2 <- read_delim("https://sisbid.github.io/Data-Wrangling/data/ufo/ufo_slice_2.tsv", 
++     delim = "\t", escape_double = FALSE, 
++     trim_ws = TRUE)
+```
+
+3. Read in the `https://sisbid.github.io/Data-Wrangling/data/ufo/ufo_slice_3.txt` dataset into the `ufo_slice_3` R object. What delimiter separates columns?
+
+```{r}
+ufo_slice_3 <- read_delim("https://sisbid.github.io/Data-Wrangling/data/ufo/ufo_slice_3.txt", 
++     delim = "\"", escape_double = FALSE, 
++     trim_ws = TRUE)
+```
+
+4. Read in the `https://sisbid.github.io/Data-Wrangling/data/ufo/ufo_slice_4.csv` dataset into the `ufo_slice_4` R object. What delimiter separates columns? [hint: file extension is ambiguous]
+
+```{r}
+fo_slice_4 <- read_delim("https://sisbid.github.io/Data-Wrangling/data/ufo/ufo_slice_4.csv", 
++     delim = ":", escape_double = FALSE, trim_ws = TRUE)
+```
+
+5. Read in the `https://sisbid.github.io/Data-Wrangling/data/ufo/ufo_slice_5.xlsx` dataset into the `ufo_slice_5` R object. 
+
+```{r}
+library(readxl)
+url <- "https://sisbid.github.io/Data-Wrangling/data/ufo/ufo_slice_5.xlsx"
+destfile <- "ufo_slice_5.xlsx"
+curl::curl_download(url, destfile)
+ufo_slice_5 <- read_excel(destfile)
+View(ufo_slice_5)
